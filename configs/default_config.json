@@ -1,0 +1,62 @@
+{
+  "_description": "Default configuration for all CyclicChamp MCP scripts",
+  "_version": "1.0.0",
+  "_created": "2025-01-01",
+
+  "global": {
+    "output_format": "png",
+    "plot_dpi": 300,
+    "show_plots": false,
+    "random_seed": 42,
+    "verbose": true
+  },
+
+  "file_handling": {
+    "create_output_dirs": true,
+    "overwrite_existing": true,
+    "backup_existing": false,
+    "file_permissions": "644"
+  },
+
+  "data_formats": {
+    "input_delimiter": "\t",
+    "filter_empty_fields": true,
+    "skip_header_lines": true,
+    "header_indicators": ["Name", "#", "//"]
+  },
+
+  "stability_thresholds": {
+    "pnear_stable": 0.9,
+    "pnear_good": 0.8,
+    "pnear_acceptable": 0.7,
+    "description": "P_near stability classification thresholds"
+  },
+
+  "peptide_constraints": {
+    "min_length": 5,
+    "max_length": 50,
+    "supported_sizes": [7, 15, 20, 24],
+    "cyclic_required": true
+  },
+
+  "error_handling": {
+    "skip_malformed_lines": true,
+    "warn_on_empty_input": true,
+    "strict_validation": false,
+    "max_warnings": 10
+  },
+
+  "performance": {
+    "max_sequences": 10000,
+    "chunk_size": 1000,
+    "memory_limit_mb": 512,
+    "parallel_processing": false
+  },
+
+  "paths": {
+    "default_input_dir": "examples/data",
+    "default_output_dir": "results",
+    "config_dir": "configs",
+    "scripts_dir": "scripts"
+  }
+}

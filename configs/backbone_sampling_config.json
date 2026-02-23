@@ -1,0 +1,89 @@
+{
+  "_description": "Configuration for CyclicChamp backbone sampling parameter generation",
+  "_source": "Extracted from examples/use_case_3_backbone_sampling_params.py",
+
+  "peptide": {
+    "supported_sizes": [7, 15, 20, 24],
+    "default_size": 15,
+    "description": "Supported cyclic peptide sizes in residues"
+  },
+
+  "parameters": {
+    "formulas": {
+      "rama_threshold": "8 * n",
+      "rep_threshold": "10 + ((n - 7) * 10) / 17",
+      "cyc_threshold": 1,
+      "hbond_count_threshold": "ceil(n / 3)",
+      "t0_rama": "10 + ((n - 7) * 20) / 17",
+      "t0_rep": "20 + ((n - 7) * 80) / 17",
+      "t0_cyc": "2 + ((n - 7) * 4) / 17",
+      "t0_hbond": "2 + ((n - 7) * 4) / 17"
+    },
+    "move_parameters": {
+      "k0_range": [0.5, 1.0],
+      "b_range": [15, 18]
+    },
+    "cooling_rates": {
+      "c_rama": 4,
+      "c_rep": 14,
+      "c_cyc": 18,
+      "c_hbond": 20
+    }
+  },
+
+  "optimization": {
+    "optimize": false,
+    "num_combinations": 20,
+    "random_seed": 42,
+    "parameter_ranges": {
+      "k0_values": [0.5, 0.667, 0.833, 1.0],
+      "b_values": [15, 16, 17, 18],
+      "c_rama_values": [2, 4, 6, 8],
+      "c_rep_values": [10, 14, 18, 22],
+      "c_cyc_values": [14, 18, 22, 26],
+      "c_hbond_values": [16, 20, 24, 28]
+    }
+  },
+
+  "simulation": {
+    "max_iterations": 10000,
+    "temperature_formula": "T0 / (1 + c * log(iteration))",
+    "description": "Simulated annealing temperature schedule"
+  },
+
+  "output": {
+    "format": "png",
+    "plot_dpi": 300,
+    "show_plots": false,
+    "include_summary_plot": true,
+    "include_optimization_plot": true,
+    "include_matlab_code": true,
+    "include_json_params": true
+  },
+
+  "plotting": {
+    "summary_figure_size": [15, 10],
+    "optimization_figure_size": [12, 8],
+    "grid_alpha": 0.3,
+    "line_markers": {
+      "ramachandran": "o-",
+      "repulsive": "s-",
+      "k0": "o-",
+      "b": "s-"
+    },
+    "highlight_color": "red",
+    "highlight_style": "--",
+    "highlight_alpha": 0.7,
+    "scatter_alpha": 0.7,
+    "scatter_size": 50,
+    "hist_bins": 10,
+    "hist_edge_color": "black"
+  },
+
+  "matlab": {
+    "include_comments": true,
+    "precision": 2,
+    "variable_prefix": "",
+    "include_peptide_size": true
+  }
+}

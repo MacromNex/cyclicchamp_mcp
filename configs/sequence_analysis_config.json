@@ -1,0 +1,79 @@
+{
+  "_description": "Configuration for cyclic peptide sequence composition and properties analysis",
+  "_source": "Extracted from examples/use_case_2_sequence_analysis.py",
+
+  "analysis": {
+    "min_pnear": 0.9,
+    "stable_only": false,
+    "description": "Analyze all designs or only stable ones (P_near > min_pnear)"
+  },
+
+  "amino_acids": {
+    "standard_mapping": {
+      "ALA": "A", "ARG": "R", "ASN": "N", "ASP": "D", "CYS": "C",
+      "GLN": "Q", "GLU": "E", "GLY": "G", "HIS": "H", "ILE": "I",
+      "LEU": "L", "LYS": "K", "MET": "M", "PHE": "F", "PRO": "P",
+      "SER": "S", "THR": "T", "TRP": "W", "TYR": "Y", "VAL": "V"
+    },
+    "hydrophobicity_scale": "kyte_doolittle",
+    "unknown_aa_symbol": "X"
+  },
+
+  "properties": {
+    "hydrophobic_threshold": 2.0,
+    "charge_threshold": 1.0,
+    "polar_residues": ["S", "T", "N", "Q", "D", "E"],
+    "aromatic_residues": ["F", "W", "Y"],
+    "charged_residues": ["R", "K", "D", "E", "H"]
+  },
+
+  "output": {
+    "format": "png",
+    "plot_dpi": 300,
+    "show_plots": false,
+    "include_composition_plots": true,
+    "include_correlation_matrix": true,
+    "include_property_scatter": true
+  },
+
+  "plotting": {
+    "main_figure_size": [15, 10],
+    "correlation_figure_size": [10, 8],
+    "bins": 15,
+    "alpha": 0.7,
+    "point_alpha": 0.6,
+    "edge_color": "black",
+    "correlation_colormap": "coolwarm"
+  },
+
+  "colors": {
+    "l_amino_acids": "green",
+    "d_amino_acids": "orange",
+    "bars": "default",
+    "scatter": "default"
+  },
+
+  "correlation": {
+    "properties": [
+      "hydrophobicity",
+      "net_charge",
+      "charged_residues",
+      "hydrophobic_residues",
+      "polar_residues",
+      "aromatic_residues",
+      "proline_count",
+      "d_fraction",
+      "pnear_ga"
+    ],
+    "text_threshold": 0.5,
+    "colorbar_label": "Correlation"
+  },
+
+  "report": {
+    "max_top_sequences": 10,
+    "include_aa_composition": true,
+    "include_chirality_stats": true,
+    "include_property_stats": true,
+    "include_correlations": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "_description": "Configuration for cyclic peptide P_near stability analysis",
+  "_source": "Extracted from examples/use_case_1_pnear_analysis.py",
+
+  "analysis": {
+    "min_pnear": 0.9,
+    "description": "Minimum P_near threshold for stable designs (0-1)"
+  },
+
+  "output": {
+    "format": "png",
+    "plot_dpi": 300,
+    "show_plots": false,
+    "include_correlation_plot": true,
+    "include_energy_plots": true,
+    "include_report": true
+  },
+
+  "plotting": {
+    "figure_size": [10, 8],
+    "correlation_plot_size": [12, 6],
+    "alpha": 0.6,
+    "point_size": 50,
+    "stable_point_size": 100,
+    "grid_alpha": 0.3,
+    "line_width": 2
+  },
+
+  "colors": {
+    "rosetta": "blue",
+    "ga": "orange",
+    "stable_both": "green",
+    "threshold_line": "red"
+  },
+
+  "report": {
+    "max_top_designs": 10,
+    "include_sequences": true,
+    "include_statistics": true
+  }
+}
