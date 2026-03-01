@@ -1,0 +1,63 @@
+{
+  "test_date": "2025-12-31T20:32:58.222877",
+  "total_tests": 6,
+  "passed": 1,
+  "failed": 5,
+  "success_rate": "16.7%",
+  "status": "partial_success",
+  "detailed_results": {
+    "Tool Information Discovery": {
+      "success": false,
+      "result": {
+        "error": "'FunctionTool' object is not callable"
+      }
+    },
+    "Backbone Parameter Generation": {
+      "success": false,
+      "result": {
+        "error": "'FunctionTool' object is not callable"
+      }
+    },
+    "Error Handling": {
+      "success": false,
+      "result": {
+        "error": "'FunctionTool' object is not callable"
+      }
+    },
+    "Job Manager": {
+      "success": true,
+      "result": {
+        "status": "success",
+        "jobs": [
+          {
+            "job_id": "fa8db40b",
+            "job_name": "test_backbone_15res",
+            "status": "completed",
+            "submitted_at": "2025-12-31T20:21:50.873498",
+            "script": "backbone_sampling_params.py"
+          },
+          {
+            "job_id": "c800507b",
+            "job_name": "test_backbone_15res",
+            "status": "failed",
+            "submitted_at": "2025-12-31T20:21:10.440561",
+            "script": "backbone_sampling_params.py"
+          }
+        ],
+        "total": 2
+      }
+    },
+    "P_near Analysis": {
+      "success": false,
+      "result": {
+        "error": "'FunctionTool' object is not callable"
+      }
+    },
+    "Submit API": {
+      "success": false,
+      "result": {
+        "error": "'FunctionTool' object is not callable"
+      }
+    }
+  }
+}

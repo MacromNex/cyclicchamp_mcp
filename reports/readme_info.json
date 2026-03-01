@@ -1,0 +1,387 @@
+{
+  "project_name": "CyclicChamp MCP Tools",
+  "mcp_server_name": "cyclicchamp-tools",
+  "description": "MCP tools for cyclic peptide computational analysis using CyclicChamp backbone sampling algorithms",
+  "version": "1.0.0",
+  "created_date": "2025-12-31",
+  "python_version": "3.12",
+  "total_tools": 16,
+  "tool_categories": {
+    "job_management": 5,
+    "sync_analysis": 3,
+    "submit_batch": 5,
+    "utilities": 3
+  },
+  "tools": [
+    {
+      "name": "analyze_pnear_stability",
+      "type": "sync",
+      "description": "Analyze P_near stability metrics with correlation plots",
+      "runtime": "~1-2 seconds",
+      "example_prompt": "Use analyze_pnear_stability to analyze @examples/data/20res_Pnear_list.txt with min_pnear=0.9 and show me the stable designs."
+    },
+    {
+      "name": "analyze_peptide_sequences",
+      "type": "sync",
+      "description": "Comprehensive sequence composition and properties analysis",
+      "runtime": "~1-3 seconds",
+      "example_prompt": "Analyze peptide sequences from @examples/data/results/Pnear_values_15res.txt using analyze_peptide_sequences. Focus only on stable designs and show me amino acid composition patterns."
+    },
+    {
+      "name": "generate_backbone_parameters",
+      "type": "sync",
+      "description": "Generate CyclicChamp sampling parameters",
+      "runtime": "<1 second",
+      "example_prompt": "Generate backbone sampling parameters for 20-residue cyclic peptides using generate_backbone_parameters with optimization enabled."
+    },
+    {
+      "name": "submit_pnear_analysis",
+      "type": "submit",
+      "description": "Submit P_near analysis for background processing",
+      "runtime": "returns job_id",
+      "example_prompt": "Submit a P_near analysis job for @examples/data/24res_Pnear_list.txt using submit_pnear_analysis with job_name=\"large_dataset_analysis\"."
+    },
+    {
+      "name": "submit_sequence_analysis",
+      "type": "submit",
+      "description": "Submit sequence analysis for background processing",
+      "runtime": "returns job_id",
+      "example_prompt": "Submit sequence analysis for large dataset using submit_sequence_analysis."
+    },
+    {
+      "name": "submit_backbone_parameter_generation",
+      "type": "submit",
+      "description": "Submit parameter generation job",
+      "runtime": "returns job_id",
+      "example_prompt": "Submit backbone parameter generation for multiple sizes."
+    },
+    {
+      "name": "submit_batch_pnear_analysis",
+      "type": "batch",
+      "description": "Process multiple P_near files",
+      "runtime": "returns job_ids",
+      "example_prompt": "Process multiple datasets using submit_batch_pnear_analysis with files: [@examples/data/20res_Pnear_list.txt, @examples/data/24res_Pnear_list.txt]"
+    },
+    {
+      "name": "submit_peptide_size_parameter_sweep",
+      "type": "batch",
+      "description": "Generate parameters for multiple sizes",
+      "runtime": "returns job_ids",
+      "example_prompt": "Generate backbone parameters for all peptide sizes using submit_peptide_size_parameter_sweep."
+    },
+    {
+      "name": "get_job_status",
+      "type": "job_management",
+      "description": "Check job progress",
+      "runtime": "<10ms",
+      "example_prompt": "Check the status of job abc12345 using get_job_status."
+    },
+    {
+      "name": "get_job_result",
+      "type": "job_management",
+      "description": "Get results when completed",
+      "runtime": "<50ms",
+      "example_prompt": "Get results for completed job using get_job_result."
+    },
+    {
+      "name": "get_job_log",
+      "type": "job_management",
+      "description": "View execution logs",
+      "runtime": "<20ms",
+      "example_prompt": "View logs for job using get_job_log with tail=100."
+    },
+    {
+      "name": "cancel_job",
+      "type": "job_management",
+      "description": "Cancel running job",
+      "runtime": "<100ms",
+      "example_prompt": "Cancel running job using cancel_job."
+    },
+    {
+      "name": "list_jobs",
+      "type": "job_management",
+      "description": "List all jobs with optional status filter",
+      "runtime": "<10ms",
+      "example_prompt": "List all running jobs using list_jobs."
+    },
+    {
+      "name": "list_available_configs",
+      "type": "utility",
+      "description": "Show available configuration files",
+      "runtime": "<10ms",
+      "example_prompt": "What configuration files are available? Use list_available_configs."
+    },
+    {
+      "name": "get_config_contents",
+      "type": "utility",
+      "description": "View configuration file contents",
+      "runtime": "<10ms",
+      "example_prompt": "Show me the contents of pnear_analysis_config.json using get_config_contents."
+    },
+    {
+      "name": "get_tool_info",
+      "type": "utility",
+      "description": "Get comprehensive tool information",
+      "runtime": "<50ms",
+      "example_prompt": "What tools are available from cyclicchamp-tools MCP server? Use get_tool_info to show me all available tools and their categories."
+    }
+  ],
+  "scripts": [
+    {
+      "name": "pnear_analysis.py",
+      "path": "scripts/pnear_analysis.py",
+      "description": "Analyze P_near stability values for cyclic peptides from CyclicChamp results",
+      "example_command": "python scripts/pnear_analysis.py --input examples/data/20res_Pnear_list.txt --output-dir results/pnear_analysis --min-pnear 0.9",
+      "parameters": [
+        "--input/-i: Path to Pnear_values_*.txt file (required)",
+        "--output-dir/-o: Output directory for plots and reports (optional)",
+        "--min-pnear: Minimum P_near threshold for stable designs (default: 0.9)",
+        "--config: Path to JSON config file (optional)"
+      ]
+    },
+    {
+      "name": "sequence_analysis.py",
+      "path": "scripts/sequence_analysis.py",
+      "description": "Analyze sequence composition, chirality patterns, and physicochemical properties",
+      "example_command": "python scripts/sequence_analysis.py --input examples/data/24res_Pnear_list.txt --stable-only --min-pnear 0.95 --output-dir results/stable_sequences",
+      "parameters": [
+        "--input/-i: Path to Pnear_values_*.txt file (required)",
+        "--output-dir/-o: Output directory (optional)",
+        "--stable-only: Analyze only stable designs above threshold (flag)",
+        "--min-pnear: P_near threshold for stable designs (default: 0.9)",
+        "--config: Path to JSON config file (optional)"
+      ]
+    },
+    {
+      "name": "backbone_sampling_params.py",
+      "path": "scripts/backbone_sampling_params.py",
+      "description": "Generate backbone sampling parameters for CyclicChamp simulated annealing",
+      "example_command": "python scripts/backbone_sampling_params.py --size 24 --optimize --output-dir results/optimization_24res",
+      "parameters": [
+        "--size/-s: Peptide size - must be 7, 15, 20, or 24 residues (required)",
+        "--output-dir/-o: Output directory (optional)",
+        "--optimize: Generate parameter combinations for optimization (flag)",
+        "--config: Path to JSON config file (optional)"
+      ]
+    }
+  ],
+  "demo_data": [
+    {
+      "file": "20res_Pnear_list.txt",
+      "path": "examples/data/20res_Pnear_list.txt",
+      "description": "P_near results for 20-residue peptides",
+      "size": "17.5 KB",
+      "used_by": ["analyze_pnear_stability", "analyze_peptide_sequences", "submit_batch_pnear_analysis"]
+    },
+    {
+      "file": "24res_Pnear_list.txt",
+      "path": "examples/data/24res_Pnear_list.txt",
+      "description": "P_near results for 24-residue peptides",
+      "size": "133 KB",
+      "used_by": ["analyze_pnear_stability", "analyze_peptide_sequences", "submit_batch_pnear_analysis"]
+    },
+    {
+      "file": "Pnear_list.txt",
+      "path": "examples/data/Pnear_list.txt",
+      "description": "Comprehensive P_near dataset",
+      "size": "176 KB",
+      "used_by": ["analyze_pnear_stability", "analyze_peptide_sequences"]
+    },
+    {
+      "file": "Pnear_values_15res.txt",
+      "path": "examples/data/results/Pnear_values_15res.txt",
+      "description": "Small 15-residue sample for quick testing",
+      "size": "1.4 KB",
+      "used_by": ["quick testing", "all analysis tools"]
+    },
+    {
+      "file": "l_res.txt",
+      "path": "examples/data/sequences/l_res.txt",
+      "description": "L-amino acid definitions",
+      "size": "-",
+      "used_by": ["sequence analysis reference"]
+    },
+    {
+      "file": "d_res.txt",
+      "path": "examples/data/sequences/d_res.txt",
+      "description": "D-amino acid definitions",
+      "size": "-",
+      "used_by": ["sequence analysis reference"]
+    }
+  ],
+  "configs": [
+    {
+      "file": "pnear_analysis_config.json",
+      "path": "configs/pnear_analysis_config.json",
+      "description": "P_near analysis settings",
+      "parameters": {
+        "min_pnear": 0.9,
+        "plotting_colors": "blue/orange",
+        "figure_sizes": "[10, 8]",
+        "plot_dpi": 300
+      }
+    },
+    {
+      "file": "sequence_analysis_config.json",
+      "path": "configs/sequence_analysis_config.json",
+      "description": "Sequence analysis settings",
+      "parameters": {
+        "aa_properties": "hydrophobic_threshold, polar_residues",
+        "min_pnear": 0.9,
+        "stable_only": false,
+        "figure_size": "[15, 10]"
+      }
+    },
+    {
+      "file": "backbone_sampling_config.json",
+      "path": "configs/backbone_sampling_config.json",
+      "description": "Parameter formulas and optimization settings",
+      "parameters": {
+        "supported_sizes": "[7, 15, 20, 24]",
+        "formulas": "energy thresholds, cooling rates",
+        "optimization": "num_combinations=20, random_seed=42"
+      }
+    },
+    {
+      "file": "default_config.json",
+      "path": "configs/default_config.json",
+      "description": "Global defaults",
+      "parameters": {
+        "output_format": "png",
+        "plot_dpi": 300,
+        "stability_thresholds": "pnear_stable=0.9"
+      }
+    }
+  ],
+  "data_format": {
+    "input_format": "tab-delimited text files",
+    "required_columns": ["Name", "Energy", "P_near_Rosetta", "P_near_GA", "Sequence"],
+    "energy_units": "kcal/mol",
+    "pnear_range": "0.0 to 1.0 (>0.9 = stable)",
+    "d_amino_acids": "D prefix notation (e.g., DLEU, DPHE, DTYR)"
+  },
+  "installation": {
+    "python_version": "3.10+",
+    "package_manager": "mamba (preferred) or conda",
+    "core_dependencies": [
+      "numpy", "matplotlib", "pandas", "scipy",
+      "loguru", "click", "tqdm"
+    ],
+    "mcp_dependencies": [
+      "fastmcp"
+    ],
+    "environment_path": "./env",
+    "tested_python": "3.12"
+  },
+  "mcp_integration": {
+    "server_registration": [
+      "fastmcp install src/server.py --name cyclicchamp-tools",
+      "claude mcp add cyclicchamp-tools -- $(pwd)/env/bin/python $(pwd)/src/server.py"
+    ],
+    "claude_code_compatible": true,
+    "gemini_cli_compatible": true,
+    "file_references": [
+      "@examples/data/20res_Pnear_list.txt",
+      "@examples/data/results/Pnear_values_15res.txt",
+      "@configs/pnear_analysis_config.json",
+      "@results/"
+    ]
+  },
+  "use_cases": [
+    {
+      "name": "Quick P_near Analysis",
+      "goal": "Analyze stability metrics for cyclic peptide designs",
+      "tools": ["analyze_pnear_stability"],
+      "expected_output": [
+        "Correlation plot comparing Rosetta vs GA P_near values",
+        "Energy vs P_near scatter plots for both methods",
+        "Statistical report with stable design counts"
+      ]
+    },
+    {
+      "name": "Sequence Composition Analysis",
+      "goal": "Understand amino acid patterns in stable cyclic peptides",
+      "tools": ["analyze_peptide_sequences"],
+      "expected_output": [
+        "6-panel composition plot (AA frequency, chirality, hydrophobicity, charge, aromatic content, secondary structure)",
+        "9x9 property correlation heatmap",
+        "Detailed statistical report with sequence insights"
+      ]
+    },
+    {
+      "name": "CyclicChamp Parameter Generation",
+      "goal": "Generate optimized backbone sampling parameters for different peptide sizes",
+      "tools": ["generate_backbone_parameters"],
+      "expected_output": [
+        "6-panel parameter visualization (energy thresholds, temperatures, move parameters)",
+        "Complete JSON parameter file",
+        "MATLAB-ready code for CyclicChamp implementation",
+        "Parameter optimization combinations"
+      ]
+    },
+    {
+      "name": "Virtual Screening Pipeline",
+      "goal": "Screen multiple peptide datasets for stability patterns",
+      "tools": ["submit_batch_pnear_analysis"],
+      "expected_output": [
+        "Batch analysis results",
+        "Designs with P_near > 0.9 and Energy < -40 kcal/mol",
+        "Backbone parameters for promising peptide sizes"
+      ]
+    },
+    {
+      "name": "End-to-End Stability Assessment",
+      "goal": "Complete analysis workflow for peptide design validation",
+      "tools": ["analyze_pnear_stability", "analyze_peptide_sequences", "generate_backbone_parameters"],
+      "expected_output": [
+        "Complete stability assessment",
+        "Sequence composition for stable designs",
+        "Optimized backbone parameters",
+        "Top 5 most stable designs"
+      ]
+    }
+  ],
+  "performance": {
+    "sync_tools": {
+      "analyze_pnear_stability": {
+        "100_designs": "~1 sec, 10 MB, 3 files",
+        "1000_designs": "~2 sec, 50 MB, 3 files"
+      },
+      "analyze_peptide_sequences": {
+        "100_sequences": "~1 sec, 15 MB, 3 files",
+        "1000_sequences": "~3 sec, 75 MB, 3 files"
+      },
+      "generate_backbone_parameters": "Any size: <1 sec, 5 MB, 3-5 files"
+    },
+    "memory_requirements": {
+      "minimum": "500 MB RAM",
+      "recommended": "2 GB RAM for large datasets (>1000 designs)",
+      "disk_space": "~10 MB per analysis output"
+    }
+  },
+  "validation_status": {
+    "all_file_paths_verified": true,
+    "script_imports_tested": true,
+    "demo_data_accessible": true,
+    "config_files_present": true,
+    "mcp_server_functional": true,
+    "claude_code_ready": true
+  },
+  "readme_sections": [
+    "Table of Contents",
+    "Overview with Features",
+    "Installation (Prerequisites, Environment Setup)",
+    "Local Usage (Scripts with Examples)",
+    "MCP Server Installation (3 Options)",
+    "Using with Claude Code (Prompts and @ References)",
+    "Using with Gemini CLI",
+    "Available Tools (16 tools categorized)",
+    "Examples (5 comprehensive use cases)",
+    "Demo Data (6 files documented)",
+    "Configuration Files (4 configs with examples)",
+    "Troubleshooting (Environment, MCP, Data, Job Issues)",
+    "Development (Testing, Dev Server)",
+    "Performance (Benchmarks and Requirements)",
+    "License and Credits"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "test_date": "2025-12-31T20:30:04.614143",
+  "server_path": "/home/xux/Desktop/CycPepMCP/CycPepMCP/tool-mcps/cyclicchamp_mcp/src/server.py",
+  "environment": "Python 3.12.12",
+  "tests": {
+    "server_startup": {
+      "status": "failed",
+      "error": "No module named 'src'",
+      "execution_time": "< 1s",
+      "actual_execution_time": "0.00s"
+    },
+    "tool_information": {
+      "status": "failed",
+      "error": "No module named 'src'",
+      "execution_time": "< 1s",
+      "actual_execution_time": "0.00s"
+    },
+    "job_manager": {
+      "status": "failed",
+      "error": "No module named 'src'",
+      "execution_time": "< 1s",
+      "actual_execution_time": "0.00s"
+    },
+    "demo_data_access": {
+      "status": "passed",
+      "message": "Can access 3 demo files",
+      "accessible_files": [
+        "20res_Pnear_list.txt",
+        "24res_Pnear_list.txt",
+        "Pnear_list.txt"
+      ],
+      "execution_time": "< 1s",
+      "actual_execution_time": "0.00s"
+    },
+    "sync_tool_execution": {
+      "status": "failed",
+      "error": "'FunctionTool' object is not callable",
+      "execution_time": "1-3s",
+      "actual_execution_time": "0.94s"
+    },
+    "error_handling": {
+      "status": "failed",
+      "error": "'FunctionTool' object is not callable",
+      "execution_time": "< 1s",
+      "actual_execution_time": "0.00s"
+    }
+  },
+  "summary": {
+    "total_tests": 6,
+    "passed": 1,
+    "failed": 5,
+    "success_rate": "16.7%",
+    "high_severity_issues": 2
+  },
+  "issues": [
+    {
+      "test": "Server Startup",
+      "error": "No module named 'src'",
+      "severity": "high"
+    },
+    {
+      "test": "Tool Information",
+      "error": "No module named 'src'",
+      "severity": "high"
+    },
+    {
+      "test": "Job Manager",
+      "error": "No module named 'src'",
+      "severity": "medium"
+    },
+    {
+      "test": "Sync Tool Execution",
+      "error": "'FunctionTool' object is not callable",
+      "severity": "medium"
+    },
+    {
+      "test": "Error Handling",
+      "error": "'FunctionTool' object is not callable",
+      "severity": "medium"
+    }
+  ]
+}

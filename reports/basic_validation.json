@@ -1,0 +1,40 @@
+{
+  "test_date": "2025-12-31T20:30:41.737803",
+  "tests": {
+    "server_import": {
+      "status": "failed",
+      "error": "No module named 'src'"
+    },
+    "job_manager": {
+      "status": "failed",
+      "error": "No module named 'src'"
+    },
+    "script_functions": {
+      "status": "passed",
+      "message": "All script functions import successfully"
+    },
+    "demo_data_access": {
+      "status": "passed",
+      "message": "Can access 3 demo files",
+      "accessible_files": [
+        "20res_Pnear_list.txt",
+        "24res_Pnear_list.txt",
+        "Pnear_list.txt"
+      ]
+    },
+    "dependencies": {
+      "status": "passed",
+      "message": "All required dependencies available"
+    },
+    "output_directory": {
+      "status": "passed",
+      "message": "Can create output directories"
+    }
+  },
+  "summary": {
+    "total_tests": 6,
+    "passed": 4,
+    "failed": 2,
+    "success_rate": "66.7%"
+  }
+}
